@@ -25,6 +25,7 @@ config.lua -- 配置总开关
 init.lua   -- 初始化接口
 json.lua   -- json函数接口
 lib.lua    -- 库函数文件
+lua        -- 其它的lua模块
 rules      -- 规则库文件目录
 waf.lua    -- waf入口文件
 ```
