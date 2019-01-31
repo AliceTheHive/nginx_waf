@@ -63,13 +63,14 @@ end
 
 --WAF log record for json,(use logstash codec => json)
 function log_record(method,url,data,ruletag)
-    local json = require("json")
-    local io = require 'io'
-    local CLIENT_IP = getClientIp()
-    local USER_AGENT = get_user_agent()
-    local SERVER_NAME = ngx.var.host
-    local LOCAL_TIME = ngx.localtime()
-    local log_json_obj = {
+    if config_log_enable = "on" then
+        local json = require("json")
+        local io = require 'io'
+        local CLIENT_IP = getClientIp()
+        local USER_AGENT = get_user_agent()
+        local SERVER_NAME = ngx.var.host
+        local LOCAL_TIME = ngx.localtime()
+        local log_json_obj = {
                  client_ip = CLIENT_IP,
                  local_time = LOCAL_TIME,
                  server_name = SERVER_NAME,
@@ -79,14 +80,15 @@ function log_record(method,url,data,ruletag)
                  req_data = data,
                  rule_tag = ruletag,
               }
-    local LOG_LINE = json.encode(log_json_obj)
-    local file = io.open(config_log_dir..'/'..ngx.today().."_waf.log", "a")
-    if file == nil then
-        return
+        local LOG_LINE = json.encode(log_json_obj)
+        local file = io.open(config_log_dir..'/'..ngx.today().."_waf.log", "a")
+        if file == nil then
+            return
+        end
+        file:write(LOG_LINE.."\n")
+        file:flush()
+        file:close()
     end
-    file:write(LOG_LINE.."\n")
-    file:flush()
-    file:close()
 end
 
 --debug info
