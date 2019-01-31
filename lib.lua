@@ -81,13 +81,15 @@ function log_record(method,url,data,ruletag)
                  rule_tag = ruletag,
               }
         local LOG_LINE = json.encode(log_json_obj)
-        local file = io.open(config_log_dir..'/'..ngx.today().."_waf.log", "a")
+        local file,err = io.open(config_log_dir..'/'..ngx.today().."_waf.log", "a")
         if file == nil then
+            ngx.log(ngx.ERR,"writefile msg: "..method.." ",err)
             return
+        else
+            file:write(LOG_LINE.."\n")
+            file:flush()
+            file:close()
         end
-        file:write(LOG_LINE.."\n")
-        file:flush()
-        file:close()
     end
 end
 
@@ -96,7 +98,8 @@ function debug_log(info)
     local io = require 'io'
     local file, err = io.open(config_log_dir.."/debug.log", "a")
     if file == nil then
-        print("Couldn't open file: "..err)
+        ngx.log(ngx.ERR,"writefile msg: "..tostring(info).." ",err)
+        return
     else
         file:write(info.."\n")
         file:flush()

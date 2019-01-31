@@ -27,6 +27,7 @@ json.lua   -- json函数接口
 lib.lua    -- 库函数文件
 rules      -- 规则库文件目录
 waf.lua    -- waf入口文件
+```
 
 ## 规则更新
 
