@@ -63,7 +63,7 @@ end
 
 --WAF log record for json,(use logstash codec => json)
 function log_record(method,url,data,ruletag)
-    if config_log_enable = "on" then
+    if config_log_enable == "on" then
         local json = require("json")
         local io = require 'io'
         local CLIENT_IP = getClientIp()

@@ -1,6 +1,8 @@
 ## 修改配置
 修改config.lua里面的值，用于启用相关配置。
 
+创建日志目录的时候注意修改nginx的执行账号能读写的权限。
+
 ## 修改rules里面的相关配置
 
 ## 添加到nginx中
@@ -37,6 +39,16 @@ waf.lua    -- waf入口文件
 
 ## 规则引擎顺序
 ```vim
+ip_white_check
+ip_black_check
+agent_attack_check
+cc_attack_check
+cookie_attack_check
+url_white_check
+url_attack_check
+args_attack_check
+post_attack_check #暂时未使用
+```
 
 
 ## 源文件引用了loveshell的waf，做了部分修改

@@ -1,8 +1,8 @@
 --WAF config file,enable = "on",disable = "off"
 
 config_waf_enable = "on"
-config_log_enable = "on"
-config_log_dir = "/opt/programs/nginx_1.14.2/logs/hack"
+config_log_enable = "off"
+config_log_dir = "/opt/programs/nginx_1.14.2/logs/waflog"
 config_rule_dir = "/opt/programs/nginx_1.14.2/conf/waf/rules"
 config_ip_white_check = "on"
 config_ip_black_check = "on"
